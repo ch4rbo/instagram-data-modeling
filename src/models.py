@@ -25,7 +25,7 @@ class Post(Base):
     user_id = Column(Integer,ForeignKey("user.id"),  nullable=False)
     medias = relationship("Media", backref="post", lazy=True)
     comments = relationship("Comment", backref="post", lazy=True)
-    
+    user= relationship('User')
 
 class Comment(Base):
     __tablename__ = 'comment'
@@ -33,6 +33,8 @@ class Comment(Base):
     comment_text = Column(String(250), nullable=False)
     author_id = Column(Integer,ForeignKey("user.id"),  nullable=False)
     post_id = Column(Integer,ForeignKey("post.id"),  nullable=False)
+    user= relationship('User')
+    post= relationship('Post')
     
 class MyEnum(enum.Enum):
     photo = 1
@@ -53,6 +55,7 @@ class Follower(Base):
     id = Column(Integer, primary_key=True)
     user_from_id = Column(Integer,ForeignKey("user.id"),  nullable=False)
     user_to_id = Column(Integer,ForeignKey("user.id"),  nullable=False)
+    user= relationship('User')
 
 
    
